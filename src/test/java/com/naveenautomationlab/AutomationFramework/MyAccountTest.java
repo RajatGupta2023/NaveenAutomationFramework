@@ -35,17 +35,20 @@ public class MyAccountTest extends TestBase {
 
 	@Test
 	public void validateLogin() {
-		login();
+		yourStore.clickOnMyAccountBtn();
+		accountLogin = yourStore.clickOnLoginBtn();
+		accountLogin.loginToPortal();
+
+		// login();
 		Assert.assertEquals(driver.getTitle(), "My Account", "You are not on logged in page");
 
 	}
-	
+
 	@Test
 	public void test1() {
 		Assert.assertEquals(false, false);
 	}
-	
-	
+
 	@Test
 	public void test2() {
 		Assert.assertEquals(false, false);
@@ -53,7 +56,12 @@ public class MyAccountTest extends TestBase {
 
 	@Test
 	public void validateChangePassword() {
-		login();
+
+		yourStore.clickOnMyAccountBtn();
+		accountLogin = yourStore.clickOnLoginBtn();
+		accountLogin.loginToPortal();
+
+		// login();
 
 		myAccount = new MyAccount();
 
@@ -64,7 +72,7 @@ public class MyAccountTest extends TestBase {
 
 		Assert.assertEquals(myAccount.getPassswordChangeSeccessfulMessage(), "Password", "Password is not changed");
 	}
-	
+
 	@AfterMethod
 	public void teerDown() {
 		tearDown();
