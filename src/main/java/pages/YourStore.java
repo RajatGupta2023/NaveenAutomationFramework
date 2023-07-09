@@ -49,11 +49,14 @@ public class YourStore extends TestBase{
 	
 	
 	public void clickOnComponentsBtn() {
+		
+		wait.until(ExpectedConditions.elementToBeClickable(componentsBtn));
 		componentsBtn.click();
 		
 	}
 	
 	public Monitors clickOnmonitorsBtn() {
+		wait.until(ExpectedConditions.elementToBeClickable(monitorsBtn));
 		monitorsBtn.click();
 		
 		return new Monitors();
@@ -61,10 +64,12 @@ public class YourStore extends TestBase{
 	}
 	
 	public void clickOnMyAccountBtn() {
+		wait.until(ExpectedConditions.elementToBeClickable(myAccountBtn));
 		myAccountBtn.click();
 	}
 	
 	public AccountLogin clickOnLoginBtn() {
+		wait.until(ExpectedConditions.elementToBeClickable(login));
 		login.click();
 		return new AccountLogin();
 	}
