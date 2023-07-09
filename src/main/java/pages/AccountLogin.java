@@ -14,9 +14,7 @@ public class AccountLogin extends TestBase {
 	@FindBy(css = "#input-email")
 	private WebElement inputEmail;
 	
-	@FindBy(css = "#input-email")
-	private WebElement inputEmails;
-
+	
 	@FindBy(css = "#input-password")
 	private WebElement password;
 
