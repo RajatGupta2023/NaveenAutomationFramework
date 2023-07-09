@@ -20,7 +20,7 @@ public class YourStore extends TestBase{
 	@FindBy(css = "ul.nav>li:nth-of-type(3) ul li:nth-of-type(2) a")
 	private WebElement monitorsBtn;
 	
-	@FindBy(xpath = "//span[text()='My Account']")
+	@FindBy(css = "a[title='My Account']")
 	private WebElement myAccountBtn;
 	
 	@FindBy(xpath = "//a[text()='Login']")
