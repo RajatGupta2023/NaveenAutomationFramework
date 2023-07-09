@@ -1,5 +1,7 @@
 package com.naveenautomationlab.AutomationFramework;
 
-public class AppleCinema30Test {
+import com.naveenautomationlabs.automationframework.base.TestBase;
+
+public class AppleCinema30Test extends TestBase {
 
 }

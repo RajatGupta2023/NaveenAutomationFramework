@@ -1,5 +1,7 @@
 package com.naveenautomationlab.AutomationFramework;
 
-public class AccountLoginTest {
+import com.naveenautomationlabs.automationframework.base.TestBase;
+
+public class AccountLoginTest extends TestBase{
 
 }

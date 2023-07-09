@@ -39,6 +39,17 @@ public class MyAccountTest extends TestBase {
 		Assert.assertEquals(driver.getTitle(), "My Account", "You are not on logged in page");
 
 	}
+	
+	@Test
+	public void test1() {
+		Assert.assertEquals(false, false);
+	}
+	
+	
+	@Test
+	public void test2() {
+		Assert.assertEquals(false, false);
+	}
 
 	@Test
 	public void validateChangePassword() {
