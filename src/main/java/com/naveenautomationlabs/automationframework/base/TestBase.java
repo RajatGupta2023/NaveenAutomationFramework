@@ -31,7 +31,7 @@ public class TestBase {
 	public static Logger logger;
 	private WebDriverEvents events;
 	private EventFiringWebDriver eDriver;
-	private String browserName = System.getProperty("BROWSER"); // Retrieve browser choice from system property
+//	private String browserName = System.getProperty("BROWSER"); // Retrieve browser choice from system property
 	private Environment environment = Environment.PROD;
 
 	public TestBase() {
@@ -58,6 +58,7 @@ public class TestBase {
 	}
 
 	public void insilisation() {
+		String browserName = System.getProperty("BROWSER");
 		switch (browserName) {
 		case "Chrome":
 			WebDriverManager.chromedriver().setup(); // Use setup() method instead of create()
