@@ -31,7 +31,7 @@ public class TestBase {
 	public static Logger logger;
 	private WebDriverEvents events;
 	private EventFiringWebDriver eDriver;
-	private String browserName = Browsers.CHROME.getBrowserName();
+	private String browserName = System.getProperty("BROWSER"); // Retrieve browser choice from system property
 	private Environment environment = Environment.PROD;
 
 	public TestBase() {
@@ -40,43 +40,47 @@ public class TestBase {
 			fileInputStream = new FileInputStream(
 					"C:\\Users\\16477\\eclipse-workspace\\AutomationFramework\\src\\main\\java\\Config\\Config.properties");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			prop.load(fileInputStream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	@BeforeClass 
-   public void setUpLogger() {
-	    logger = Logger.getLogger(TestBase.class);
-	    PropertyConfigurator.configure("log4j.properties");
+
+	@BeforeClass
+	public void setUpLogger() {
+		logger = Logger.getLogger(TestBase.class);
+		PropertyConfigurator.configure("log4j.properties");
 		BasicConfigurator.configure();
 		logger.setLevel(Level.ALL);
-   }
+	}
+
 	public void insilisation() {
-		
 		switch (browserName) {
 		case "Chrome":
-			driver = WebDriverManager.chromedriver().create();
+			WebDriverManager.chromedriver().setup(); // Use setup() method instead of create()
+			driver = new ChromeDriver();
 			break;
 		case "Edge":
-			driver = WebDriverManager.edgedriver().create();
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 			break;
 		case "FireFox":
-			driver = WebDriverManager.firefoxdriver().create();
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
 			break;
+		default:
+			throw new IllegalArgumentException("Invalid browser choice: " + browserName);
 		}
-      eDriver = new EventFiringWebDriver(driver);
-      events = new WebDriverEvents();
-      eDriver.register(events);
-      driver = eDriver;
+
+		eDriver = new EventFiringWebDriver(driver);
+		events = new WebDriverEvents();
+		eDriver.register(events);
+		driver = eDriver;
+
 		driver.get(environment.getUrl());
-		// driver.manage().timeouts().implicitlyWait(Long.parseLong(prop.getProperty("IMPLICIT_WAIT")),
-		// TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
