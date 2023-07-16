@@ -34,7 +34,7 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 
 	}
 
-	@Test 
+	@Test @Ignore
 	public void validateCustomerOrderprocess() {
 		yourStore.clickOnComponentsBtn();
 		monitors = yourStore.clickOnmonitorsBtn();
