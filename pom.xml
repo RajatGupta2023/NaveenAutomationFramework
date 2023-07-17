@@ -84,14 +84,16 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
 					<configuration>
+						<!-- Set this property to 'true' to ignore test failures during the 
+							initial test run -->
 						<testFailureIgnore>true</testFailureIgnore>
+
 						<suiteXmlFiles>
 							<suiteXmlFile>target/surefire-reports/testng-failed.xml</suiteXmlFile>
 						</suiteXmlFiles>
 					</configuration>
-					<version>2.22.1</version>
-
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
