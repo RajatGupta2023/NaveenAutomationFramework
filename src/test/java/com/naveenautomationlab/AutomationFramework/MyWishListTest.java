@@ -32,7 +32,7 @@ public class MyWishListTest extends TestBase {
 		myWishlist = myAccount.clickWishListBtn();
 
 	}
-
+	
 	@Test
 	public void validateProductStock() {
 		
