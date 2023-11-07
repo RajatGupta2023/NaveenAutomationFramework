@@ -1,77 +1,89 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
 import com.naveenautomationlabs.automationframework.base.TestBase;
 
-public class YourStore extends TestBase{
-	WebDriverWait wait;
-	public YourStore() {
-		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, 30);
+public class YourStore extends Page {
+	public String PAGE_URL = "/opencart/index.php?route=common/home";
+
+	public YourStore(WebDriver driver, boolean waitForPageToLoad) {
+		super(driver, waitForPageToLoad);
+
 	}
-	@FindBy(css = "ul.nav>li:nth-of-type(3) a")
-	private WebElement componentsBtn;
-	
-	@FindBy(css = "ul.nav>li:nth-of-type(3) ul li:nth-of-type(2) a")
-	private WebElement monitorsBtn;
-	
-	@FindBy(css = "a[title='My Account']")
-	private WebElement myAccountBtn;
-	
-	@FindBy(xpath = "//a[text()='Login']")
-	private WebElement login;
-	
-	
-	@FindBy(css = "div#slideshow0 >div>div.swiper-slide-duplicate-prev")
-	private WebElement firstImage;
-	
+
+	private static By componentsBtn = By.cssSelector("ul.nav>li:nth-of-type(3) a");
+	private static By monitorsBtn = By.cssSelector("ul.nav>li:nth-of-type(3) ul li:nth-of-type(2) a");
+	private static By myAccountBtn = By.cssSelector("a[title='My Account']");
+
+	private static By login = By.xpath("//a[text()='Login']");
+	private static By registerBtn = By.xpath("//a[text()='Register']");
+	private static By firstImage = By.cssSelector("div#slideshow0 >div>div.swiper-slide-duplicate-prev");
+
 	public WebElement getFirstImageWebElement() {
-		//wait.until(ExpectedConditions.visibilityOf(image));
-		
-		return firstImage;
-		
+
+		return ((ProxyDriver) driver).findElement(firstImage);
+
 	}
-	
-	@FindBy(css = "div#slideshow0 >div>div.swiper-slide-duplicate-active")
-	private WebElement secondImage;
-	
+
+	private static By secondImage = By.cssSelector("div#slideshow0 >div>div.swiper-slide-duplicate-active");
+
 	public WebElement getSecondImageWebElement() {
-		//wait.until(ExpectedConditions.visibilityOf(image));
-		
-		return secondImage;
-		
+		return ((ProxyDriver) driver).findElement(secondImage);
+
 	}
-	
-	
+
 	public void clickOnComponentsBtn() {
-		
-		wait.until(ExpectedConditions.elementToBeClickable(componentsBtn));
-		componentsBtn.click();
-		
+
+		((ProxyDriver) driver).click(componentsBtn);
+
 	}
-	
+
 	public Monitors clickOnmonitorsBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(monitorsBtn));
-		monitorsBtn.click();
 		
-		return new Monitors();
-		
+		((ProxyDriver) driver).click(monitorsBtn);
+
+		return new Monitors(driver, true);
+
 	}
-	
+
 	public void clickOnMyAccountBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(myAccountBtn));
-		myAccountBtn.click();
+		
+		((ProxyDriver) driver).click(myAccountBtn);
 	}
-	
+
 	public AccountLogin clickOnLoginBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(login));
-		login.click();
-		return new AccountLogin();
+		
+		((ProxyDriver) driver).click(login);
+		return new AccountLogin(driver, true);
 	}
 	
+	public RegisterAccount clickOnRegisterBtn() {
+		
+		((ProxyDriver) driver).click(registerBtn);
+		return new RegisterAccount(driver, true);
+	}
+	@Override
+	protected void isLoaded() {
+		if (!urlContains(driver.getCurrentUrl())) {
+			throw new Error();
+		}
+	}
+
+	@Override
+	protected String getPageUrl() {
+		return getDomain() + PAGE_URL;
+	}
+	
+	@Override
+	public YourStore get() {
+		return (YourStore) super.get();
+	}
 }

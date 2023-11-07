@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import com.naveenautomationlab.AutomationFramework.Utils.Utils;
 import com.naveenautomationlabs.automationframework.base.TestBase;
 
 import pages.AppleCinema30;
@@ -29,8 +30,8 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		insilisation();
-		yourStore = new YourStore();
-		wait = new WebDriverWait(driver, 10);
+		yourStore = new YourStore(driver, true).get();
+		
 
 	}
 
@@ -45,7 +46,8 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 		appleCinema30.selectcolor();
 		appleCinema30.enterMessageInTextArea();
 		appleCinema30.uploadingFile();
-		wait.until(ExpectedConditions.alertIsPresent());
+//		wait.until(ExpectedConditions.alertIsPresent());
+		Utils.sleep(2000);
 		driver.switchTo().alert().accept();
 		appleCinema30.clickOnaddToCartBtn();
 		appleCinema30.clickOnaddToCartBtn();

@@ -4,46 +4,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
 import com.naveenautomationlabs.automationframework.base.TestBase;
 
-public class MyAccount extends TestBase {
-	private WebDriverWait wait;
+public class MyAccount extends Page {
 
 	List<WebElement> elements = new ArrayList<>();
 
-	public MyAccount() {
-		PageFactory.initElements(driver, this);
-		wait = new WebDriverWait(driver, 10);
+	private static final String PAGE_URL = "opencart/index.php?route=account/account";
+
+	public MyAccount(WebDriver driver, boolean waitForPageToLoad) {
+		super(driver, waitForPageToLoad);
+
 	}
 
-	@FindBy(css = "div.list-group>a:nth-of-type(3)")
-	private WebElement passwordBtn;
-
-	@FindBy(css = "ul.list-inline>li:nth-of-type(3)")
-	WebElement wishListBtn;
+	private static By passwordBtn = By.cssSelector("div.list-group>a:nth-of-type(3)");
+	private static By wishListBtn = By.cssSelector("ul.list-inline>li:nth-of-type(3)");
 
 	public ChangePassword clickOnPasswordBtn() {
-		passwordBtn.click();
-		return new ChangePassword();
+		((ProxyDriver) driver).click(passwordBtn);
+		return new ChangePassword(driver, false);
 	}
 
-	@FindBy(css = "div.list-group>a:nth-of-type(3)")
-	private WebElement passswordChangeSeccessfulMessage;
+	private static By passswordChangeSeccessfulMessage = By.cssSelector("div.list-group>a:nth-of-type(3)");
 
 	public String getPassswordChangeSeccessfulMessage() {
 
-		return passswordChangeSeccessfulMessage.getText();
+		return ((ProxyDriver) driver).getText(passswordChangeSeccessfulMessage);
 	}
 
 	public boolean selectionFromNavigation(String selection) {
 
-		elements = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div.list-group a")));
+		By elementsLocator = By.cssSelector("div.list-group a");
+		List<WebElement> elements = driver.findElements(elementsLocator);
+		// elements =
+		// wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div.list-group
+		// a")));
 		for (WebElement element : elements) {
 			if (element.getText().equals(selection)) {
 				return true;
@@ -54,8 +57,20 @@ public class MyAccount extends TestBase {
 	}
 
 	public MyWishList clickWishListBtn() {
-		wishListBtn.click();
+		((ProxyDriver) driver).click(wishListBtn);
 		return new MyWishList();
+	}
+
+	@Override
+	protected void isLoaded() {
+		if (!urlContains(driver.getCurrentUrl())) {
+			throw new Error();
+		}
+	}
+
+	@Override
+	protected String getPageUrl() {
+		return getDomain() + PAGE_URL;
 	}
 
 }

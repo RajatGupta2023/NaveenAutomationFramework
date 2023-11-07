@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import com.naveenautomationlab.AutomationFramework.Listeners.WebDriverEvents;
 import com.naveenautomationlab.AutomationFramework.Utils.Browsers;
 import com.naveenautomationlab.AutomationFramework.Utils.Environment;
+import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class TestBase {
 	private EventFiringWebDriver eDriver;
 //	private String browserName = System.getProperty("BROWSER"); // Retrieve browser choice from system property
 	private Environment environment = Environment.PROD;
+	private final Browsers DEFAULT_BROWSER = Browsers.CHROME;
 
 	public TestBase() {
 		prop = new Properties();
@@ -57,31 +59,49 @@ public class TestBase {
 		logger.setLevel(Level.ALL);
 	}
 
+//	public void insilisation() {
+//		String browserName = System.getProperty("BROWSER","Chrome");
+//		switch (browserName) {
+//		case "Chrome":
+//			//WebDriverManager.chromedriver().setup(); // Use setup() method instead of create()
+//			//driver = new ProxyDriver(WebDriverManager.edgedriver().create());
+//			//driver = new ChromeDriver();
+//			driver = new ProxyDriver(WebDriverManager.chromedriver().create());
+//			
+//			break;
+//		case "Edge":
+//			WebDriverManager.edgedriver().setup();
+//			driver = new EdgeDriver();
+//			break;
+//		case "FireFox":
+//			WebDriverManager.firefoxdriver().setup();
+//			driver = new FirefoxDriver();
+//			break;
+//		default:
+//			throw new IllegalArgumentException("Invalid browser choice: " + browserName);
+//		}
+
 	public void insilisation() {
-		String browserName = System.getProperty("BROWSER","Chrome");
-		switch (browserName) {
-		case "Chrome":
-			WebDriverManager.chromedriver().setup(); // Use setup() method instead of create()
-			driver = new ChromeDriver();
+		switch (DEFAULT_BROWSER) {
+		case CHROME:
+			driver = new ProxyDriver(WebDriverManager.chromedriver().create());
 			break;
-		case "Edge":
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
+		case EDGE:
+			driver = WebDriverManager.edgedriver().create();
 			break;
-		case "FireFox":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+		case FIREFOX:
+			driver = WebDriverManager.firefoxdriver().create();
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid browser choice: " + browserName);
+			throw new IllegalArgumentException();
 		}
-
-		eDriver = new EventFiringWebDriver(driver);
+	
+	/*	eDriver = new EventFiringWebDriver(driver);
 		events = new WebDriverEvents();
 		eDriver.register(events);
 		driver = eDriver;
 
-		driver.get(environment.getUrl());
+		driver.get(environment.getUrl());  */
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}

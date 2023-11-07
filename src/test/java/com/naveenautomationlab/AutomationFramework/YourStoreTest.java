@@ -13,13 +13,13 @@ import pages.YourStore;
 public class YourStoreTest extends TestBase {
 
 	private YourStore yourStore;
-	private WebDriverWait wait;
+	
 
 	@BeforeMethod
 	public void setup() {
 		insilisation();
-		yourStore = new YourStore();
-		wait = new WebDriverWait(driver, 30);
+		yourStore = new YourStore(driver, true).get();
+		
 
 	}
 

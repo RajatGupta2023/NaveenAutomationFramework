@@ -1,5 +1,7 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -7,34 +9,33 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
 import com.naveenautomationlabs.automationframework.base.TestBase;
 
-public class Checkout extends TestBase {
-	public Checkout() {
-		PageFactory.initElements(driver, this);
+public class Checkout extends Page {
+	public String PAGE_URL = "";
+
+	public Checkout(WebDriver driver, boolean waitForPageToLoad) {
+		super(driver, waitForPageToLoad);
+
 	}
 
-	WebDriverWait wait = new WebDriverWait(driver, 10);
-	@FindBy(css = "#input-email")
-	private WebElement emailInputField;
-
-	@FindBy(css = "#input-password")
-	private WebElement passwordInputField;
-
-	@FindBy(css = "#button-login")
-	private WebElement loginBtn;
+	private static By emailInputField = By.cssSelector("#input-email");
+	private static By passwordInputField = By.cssSelector("#input-password");
+	private static By loginBtn = By.cssSelector("#button-login");
 
 	private void enterEmail() {
-		emailInputField.sendKeys("jainrajat1234@gmail.com");
+		((ProxyDriver) driver).sendKeys(emailInputField, "jainrajat1234@gmail.com");
+
 	}
 
 	private void enterPassword() {
-		passwordInputField.sendKeys("RAJATjain");
+		((ProxyDriver) driver).sendKeys(passwordInputField, "RAJATjain");
+
 	}
 
 	private void clickLoginBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
-		loginBtn.click();
+		((ProxyDriver) driver).click(loginBtn);
 
 	}
 
@@ -45,85 +46,65 @@ public class Checkout extends TestBase {
 	}
 
 	// Address
-	@FindBy(css = "form.form-horizontal>div:nth-of-type(3) input")
-	private WebElement newAddressRadioBtn;
-
-	@FindBy(css = "#input-payment-firstname")
-	private WebElement firstNameInputField;
-
-	@FindBy(css = "#input-payment-lastname")
-	private WebElement lastNameInputField;
-
-	@FindBy(css = "#input-payment-company")
-	private WebElement companyInputField;
-
-	@FindBy(css = "#input-payment-address-1")
-	private WebElement address1InputField;
-
-	@FindBy(css = "#input-payment-address-2")
-	private WebElement address2InputField;
-
-	@FindBy(css = "#input-payment-city")
-	private WebElement cityInputField;
-
-	@FindBy(css = "#input-payment-postcode")
-	private WebElement postalCodeInputField;
-
-	@FindBy(css = "#input-payment-country")
-	private WebElement countryInputField;
-
-	@FindBy(css = "#input-payment-zone")
-	private WebElement stateInputField;
-
-	@FindBy(css = "#button-payment-address")
-	private WebElement billingDetailsContinueBtn;
+	private static By newAddressRadioBtn = By.cssSelector("form.form-horizontal>div:nth-of-type(3) input");
+	private static By firstNameInputField = By.cssSelector("#input-payment-firstname");
+	private static By lastNameInputField = By.cssSelector("#input-payment-lastname");
+	private static By companyInputField = By.cssSelector("#input-payment-company");
+	private static By address1InputField = By.cssSelector("#input-payment-address-1");
+	private static By address2InputField = By.cssSelector("#input-payment-address-2");
+	private static By cityInputField = By.cssSelector("#input-payment-city");
+	private static By postalCodeInputField = By.cssSelector("#input-payment-postcode");
+	private static By countryInputField = By.cssSelector("#input-payment-country");
+	private static By stateInputField = By.cssSelector("#input-payment-zone");
+	private static By billingDetailsContinueBtn = By.cssSelector("#button-payment-address");
 
 	private void clickOnNewAddressRadioBtn() {
-		newAddressRadioBtn.click();
+		((ProxyDriver) driver).click(newAddressRadioBtn);
 	}
 
 	private void enterFirstName() {
-		firstNameInputField.sendKeys("Rajat");
+		((ProxyDriver) driver).sendKeys(firstNameInputField, "Rajat");
 	}
 
 	private void enterLastName() {
-		lastNameInputField.sendKeys("Jain");
+		((ProxyDriver) driver).sendKeys(lastNameInputField, "Jain");
 	}
 
 	private void enterCompany() {
-		companyInputField.sendKeys("ATS");
+		((ProxyDriver) driver).sendKeys(companyInputField, "ATS");
 	}
 
 	private void enterAddress1() {
-		address1InputField.sendKeys("ABC Drive");
+		((ProxyDriver) driver).sendKeys(address1InputField, "ABC Drive");
 	}
 
 	private void enterAddress2() {
-		address2InputField.sendKeys("ABC Drive");
+		((ProxyDriver) driver).sendKeys(address2InputField, "ABC Drive");
 	}
 
 	private void enterCity() {
-		cityInputField.sendKeys("Brampton");
+		((ProxyDriver) driver).sendKeys(cityInputField, "Brampton");
 	}
 
 	private void enterPostalCode() {
-		postalCodeInputField.sendKeys("A1B2C3");
+		((ProxyDriver) driver).sendKeys(postalCodeInputField, "A1B2C3");
 	}
 
 	private void selectCountry() {
-		Select sc = new Select(countryInputField);
+		WebElement countryInputFieldWebElement = ((ProxyDriver) driver).findElement(countryInputField);
+		Select sc = new Select(countryInputFieldWebElement);
 		sc.selectByValue("38");
 	}
 
 	private void selectState() {
-		Select sc = new Select(stateInputField);
+		WebElement stateInputFieldWebElement = ((ProxyDriver) driver).findElement(stateInputField);
+		Select sc = new Select(stateInputFieldWebElement);
 		sc.selectByValue("610");
 	}
 
 	private Checkout clickBillingDetailsContinueBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(billingDetailsContinueBtn));
-		billingDetailsContinueBtn.click();
-		return new Checkout();
+		((ProxyDriver) driver).click(billingDetailsContinueBtn);
+		return new Checkout(driver, true);
 	}
 
 	public void billingAddressToPortal() {
@@ -141,83 +122,58 @@ public class Checkout extends TestBase {
 		clickBillingDetailsContinueBtn();
 	}
 
-	@FindBy(css = "div#collapse-shipping-address>div:first-of-type input")
-	private WebElement deliverDetailsRadioBtn;
-
-	@FindBy(css = "input#button-shipping-address")
-	private WebElement deliverContinueBtn;
-
-//	private void clickDeliverDetailsRadioBtn() {
-//		deliverDetailsRadioBtn.click();
-//		
-//	}
+	private static By deliverDetailsRadioBtn = By.cssSelector("div#collapse-shipping-address>div:first-of-type input");
+	private static By deliverContinueBtn = By.cssSelector("input#button-shipping-address");
 
 	public void clickdeliverContinueBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(deliverContinueBtn));
-		deliverContinueBtn.click();
+
+		((ProxyDriver) driver).click(deliverContinueBtn);
 
 	}
 
 	public void deliveryAddressToPortal() {
-		// clickDeliverDetailsRadioBtn();
+
 		clickdeliverContinueBtn();
 	}
 
 	// Delivery Method
 
-//	@FindBy(css = "input[value='flat.flat']")
-//	private WebElement flatRateRadioBtn;
+	private static By deliveryMethodContinueBtn = By.cssSelector("input#button-shipping-method");
 
-//	@FindBy(css = "textarea.form-control")
-//	private WebElement addCommentsInputField;
-
-	@FindBy(css = "input#button-shipping-method")
-	private WebElement deliveryMethodContinueBtn;
-
-//	private void clickOnFlatRateRadioBtn() {
-//		flatRateRadioBtn.click();
-//	}
-
-//	private void addCommentsInputField() {
-//		addCommentsInputField.sendKeys("Thanks for this product");
-//	}
 
 	private void clickOnDeliveryMethodContinueBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(deliveryMethodContinueBtn));
-		deliveryMethodContinueBtn.click();
+
+		((ProxyDriver) driver).click(deliveryMethodContinueBtn);
 
 	}
 
 	public void deliveryMethodToPortal() {
-		// clickOnFlatRateRadioBtn();
-		// addCommentsInputField();
+		
 		clickOnDeliveryMethodContinueBtn();
 	}
 
 	// Payment Method
+	
+	
+	private static By cashOnDeliveryRadioBtn = By.cssSelector("input[name='payment_method']");
+	private static By termsAndConditionsCheckBtn = By.cssSelector("input[name='agree']");
+	private static By paymentMethodContinueBtn = By.cssSelector("input#button-payment-method");
 
-	@FindBy(css = "input[name='payment_method']")
-	private WebElement cashOnDeliveryRadioBtn;
 
-	@FindBy(css = "input[name='agree']")
-	private WebElement termsAndConditionsCheckBtn;
-
-	@FindBy(css = "input#button-payment-method")
-	private WebElement paymentMethodContinueBtn;
 
 	private void clickOnCashOnDeliveryRadioBtn() {
-		cashOnDeliveryRadioBtn.click();
+		((ProxyDriver) driver).click(cashOnDeliveryRadioBtn);
 	}
 
 	private void clickOntermsAndConditionsCheckBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(termsAndConditionsCheckBtn));
-		termsAndConditionsCheckBtn.click();
+
+		((ProxyDriver) driver).click(termsAndConditionsCheckBtn);
 	}
 
 	private Checkout clickOnPaymentMethodContinueBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(paymentMethodContinueBtn));
-		paymentMethodContinueBtn.click();
-		return new Checkout();
+
+		((ProxyDriver) driver).click(paymentMethodContinueBtn);
+		return new Checkout(driver, true);
 	}
 
 	public Checkout paymentMethodToPortal() {
@@ -227,15 +183,26 @@ public class Checkout extends TestBase {
 	}
 
 	// Confirm Order
+	
+	private static By confirmOrderBtn = By.cssSelector("input#button-confirm");
 
-	@FindBy(css = "input#button-confirm")
-	private WebElement confirmOrderBtn;
-
+	
 	public YourOrderHasBeenPlaced clickOnconfirmOrderBtn() {
-		wait.until(ExpectedConditions.elementToBeClickable(confirmOrderBtn));
 
-		confirmOrderBtn.click();
-		return new YourOrderHasBeenPlaced();
+		((ProxyDriver) driver).click(confirmOrderBtn);
+		return new YourOrderHasBeenPlaced(driver, true);
+	}
+	
+	@Override
+	protected void isLoaded() {
+		if (!urlContains(driver.getCurrentUrl())) {
+			throw new Error();
+		}
+	}
+
+	@Override
+	protected String getPageUrl() {
+		return getDomain() + PAGE_URL;
 	}
 
 }

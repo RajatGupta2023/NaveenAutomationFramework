@@ -22,7 +22,8 @@ public class MyAccountTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		insilisation();
-		yourStore = new YourStore();
+		accountLogin = new AccountLogin(driver,false).get();
+		yourStore = new YourStore(driver, false);
 
 	}
 
@@ -63,7 +64,7 @@ public class MyAccountTest extends TestBase {
 
 		// login();
 
-		myAccount = new MyAccount();
+		myAccount = new MyAccount(driver, false);
 
 		changePassword = myAccount.clickOnPasswordBtn();
 		changePassword.enterPassword();
