@@ -37,6 +37,13 @@ public class MyWishListTest extends TestBase {
 	public void testGit() {
 		System.out.println("Git Testing");
 	}
+	
+	@Test
+	public void testGit1() {
+		System.out.println("Git Testing");
+	}
+	
+	
 
 	@Test
 	public void validateProductStock() {
