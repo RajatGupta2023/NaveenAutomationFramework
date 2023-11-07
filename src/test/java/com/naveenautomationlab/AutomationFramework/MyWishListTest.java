@@ -34,18 +34,6 @@ public class MyWishListTest extends TestBase {
 	}
 	
 	@Test
-	public void testGit() {
-		System.out.println("Git Testing");
-	}
-	
-	@Test
-	public void testGit1() {
-		System.out.println("Git Testing");
-	}
-	
-	
-
-	@Test
 	public void validateProductStock() {
 		
 //		WebElement element = myWishlist.getCellElementFromTable(MyWishListTable.STOCK, "Product 15");
