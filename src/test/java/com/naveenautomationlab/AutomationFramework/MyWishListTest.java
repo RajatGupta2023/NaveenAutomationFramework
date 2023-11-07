@@ -32,6 +32,11 @@ public class MyWishListTest extends TestBase {
 		myWishlist = myAccount.clickWishListBtn();
 
 	}
+	
+	@Test
+	public void testGit() {
+		System.out.println("Git Testing");
+	}
 
 	@Test
 	public void validateProductStock() {
