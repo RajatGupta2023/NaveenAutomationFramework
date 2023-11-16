@@ -1,13 +1,6 @@
 package com.naveenautomationlabs.automationframework.base;
 
 import java.io.FileInputStream;
-import org.testng.annotations.BeforeClass;
-
-import com.naveenautomationlab.AutomationFramework.Listeners.WebDriverEvents;
-import com.naveenautomationlab.AutomationFramework.Utils.Browsers;
-import com.naveenautomationlab.AutomationFramework.Utils.Environment;
-import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -18,10 +11,13 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.BeforeClass;
+
+import com.naveenautomationlab.AutomationFramework.Listeners.WebDriverEvents;
+import com.naveenautomationlab.AutomationFramework.Utils.Browsers;
+import com.naveenautomationlab.AutomationFramework.Utils.Environment;
+import com.naveenautomationlab.AutomationFramework.Utils.ProxyDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 

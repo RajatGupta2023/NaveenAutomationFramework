@@ -27,17 +27,40 @@ public class MyAccount extends Page {
 
 	private static By passwordBtn = By.cssSelector("div.list-group>a:nth-of-type(3)");
 	private static By wishListBtn = By.cssSelector("ul.list-inline>li:nth-of-type(3)");
+	private static By modifyYourAddressBookEntriesBtn = By.xpath("//a[text()='Modify your address book entries']");
+	private static By passswordChangeSeccessfulMessage = By.cssSelector("div.list-group>a:nth-of-type(3)");
+	private static By editYourAccountInformationBtn = By.xpath("//a[text()='Edit your account information']");
+	private static By accountUpdatedMessage = By.cssSelector("div.list-group>a:nth-of-type(3)");
+	private static By returnsBtn = By.cssSelector("footer>div>div>div:nth-of-type(2)>ul>li:nth-of-type(2)>a");
 
 	public ChangePassword clickOnPasswordBtn() {
 		((ProxyDriver) driver).click(passwordBtn);
-		return new ChangePassword(driver, false);
+		return new ChangePassword(driver, true);
 	}
 
-	private static By passswordChangeSeccessfulMessage = By.cssSelector("div.list-group>a:nth-of-type(3)");
+	public ProductReturns clickOnReturnsBtn() {
+		((ProxyDriver) driver).click(returnsBtn);
+		return new ProductReturns(driver,true);
+	}
+
+	public AddressBook clickOnModifyYourAddressBookEntriesBtn() {
+		((ProxyDriver) driver).click(modifyYourAddressBookEntriesBtn);
+		return new AddressBook(driver, true);
+	}
+
+	public MyAccountInformation clickOnEditYourAccountInformationBtn() {
+		((ProxyDriver) driver).click(editYourAccountInformationBtn);
+		return new MyAccountInformation(driver, true);
+	}
 
 	public String getPassswordChangeSeccessfulMessage() {
 
 		return ((ProxyDriver) driver).getText(passswordChangeSeccessfulMessage);
+	}
+
+	public String getAccountUpdatedMessage() {
+
+		return ((ProxyDriver) driver).getText(accountUpdatedMessage);
 	}
 
 	public boolean selectionFromNavigation(String selection) {

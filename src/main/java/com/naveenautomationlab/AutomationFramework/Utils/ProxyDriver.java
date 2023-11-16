@@ -80,6 +80,8 @@ public class ProxyDriver implements WebDriver, JavascriptExecutor, TakesScreensh
 		ProxyDriver.this.driver.quit();
 
 	}
+	
+	
 
 	@Override
 	public Set<String> getWindowHandles() {
@@ -166,7 +168,8 @@ public class ProxyDriver implements WebDriver, JavascriptExecutor, TakesScreensh
 		element.click();
 	}
 
-	public void selectItemFromDropDown(WebElement element, String text) {
+	public void selectItemFromDropDown(By by, String text) {
+		WebElement element = ProxyDriver.this.driver.findElement(by);
 		waitForElementToBeSelectable(element);
 		Select sc = new Select(element);
 		try {

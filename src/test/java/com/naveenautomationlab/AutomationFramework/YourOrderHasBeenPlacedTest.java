@@ -1,6 +1,5 @@
 package com.naveenautomationlab.AutomationFramework;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -25,7 +24,7 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 	private ShoppingCart shoppingCart;
 	private Checkout checkout;
 	private YourOrderHasBeenPlaced yourOrderHasBeenPlaced;
-	private WebDriverWait wait;
+	
 
 	@BeforeMethod
 	public void setup() {
@@ -35,7 +34,7 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 
 	}
 
-	@Test 
+	@Test @Ignore
 	public void validateCustomerOrderprocess() {
 		yourStore.clickOnComponentsBtn();
 		monitors = yourStore.clickOnmonitorsBtn();

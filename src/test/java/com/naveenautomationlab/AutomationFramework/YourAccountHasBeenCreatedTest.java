@@ -1,6 +1,7 @@
 package com.naveenautomationlab.AutomationFramework;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.naveenautomationlabs.automationframework.base.TestBase;
@@ -33,6 +34,11 @@ public class YourAccountHasBeenCreatedTest extends TestBase {
 
 		Assert.assertEquals(yourAccountHasBeenCreatedMessage, "Your Account Has Been Created!");
 
+	}
+	
+	@AfterMethod
+	public void teerDown() {
+		tearDown();
 	}
 
 

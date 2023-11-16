@@ -20,29 +20,10 @@
         <methods>
           <include name="teerDown"/>
           <include name="setup"/>
-          <include name="test1"/>
           <include name="validateChangePassword"/>
-          <include name="validateLogin"/>
           <include name="setUpLogger"/>
-          <include name="test2"/>
         </methods>
       </class> <!-- com.naveenautomationlab.AutomationFramework.MyAccountTest -->
-      <class name="com.naveenautomationlab.AutomationFramework.MyWishListTest">
-        <methods>
-          <include name="validateProductStock"/>
-          <include name="teerDown"/>
-          <include name="setUpLogger"/>
-          <include name="setUp"/>
-        </methods>
-      </class> <!-- com.naveenautomationlab.AutomationFramework.MyWishListTest -->
-      <class name="com.naveenautomationlab.AutomationFramework.YourStoreTest">
-        <methods>
-          <include name="teerDown"/>
-          <include name="setup"/>
-          <include name="validateImageSlideShow"/>
-          <include name="setUpLogger"/>
-        </methods>
-      </class> <!-- com.naveenautomationlab.AutomationFramework.YourStoreTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
