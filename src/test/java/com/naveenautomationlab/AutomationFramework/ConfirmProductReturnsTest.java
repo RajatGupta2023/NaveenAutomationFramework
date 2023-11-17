@@ -5,7 +5,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.naveenautomationlab.AutomationFramework.Utils.Utils;
 import com.naveenautomationlabs.automationframework.base.TestBase;
 
 import pages.AccountLogin;
@@ -40,7 +39,7 @@ public class ConfirmProductReturnsTest extends TestBase {
 		
 		Assert.assertEquals(confirmProductReturns.getProductReturnMessage(), "Product Returns");
 
-		Utils.sleep(10000);
+	
 
 	}
 
